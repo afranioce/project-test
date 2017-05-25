@@ -1,22 +1,27 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {% if error %}
-        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
-
-
     <form action="{{ path('app_user_security_login') }}" method="post">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="_username" value="{{ last_username }}" />
+        {% if error %}
+            <div class="flash-error">
+                {{ error.messageKey|trans(error.messageData, 'security') }}
+            </div>
+        {% endif %}
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="_password" />
+        <div class="container">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="_username" value="{{ last_username }}" />
 
-        <input type="hidden" name="_target_path" value="account" />
-        <input type="hidden" name="_failure_path" value="login" />
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="_password" />
 
-        <input type="submit" name="login" />
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
+
+            <button type="submit">Login</button>
+        </div>
+
+        <div class="container" style="background-color:#f1f1f1">
+            <span class="psw">Do not have register? <a href="{{ url('app_user_registration_register') }}" class="to_register">Sign up</a></span>
+        </div>
     </form>
 {% endblock %}

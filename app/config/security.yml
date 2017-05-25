@@ -25,6 +25,10 @@ security:
                 csrf_token_generator: security.csrf.token_manager
                 use_forward: false
                 login_path: app_user_security_login
+                check_path: app_user_security_login
+            logout:
+                path:   /logout
+                target: /
             anonymous: ~
             remember_me:
                 secret: "%secret%"
@@ -33,4 +37,5 @@ security:
 
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/, roles: ROLE_USER }

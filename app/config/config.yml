@@ -6,11 +6,15 @@ imports:
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: en
+    locale: pt_BR
+    page_title: ~
+    site_prefix: Project
+    site_name: Test
+    site_slogan: Lorem Ipsum is simply dummy text of the printing
 
 framework:
     #esi: ~
-    #translator: { fallbacks: ['%locale%'] }
+    translator: { fallbacks: ['%locale%'] }
     secret: '%secret%'
     router:
         resource: '%kernel.root_dir%/config/routing.yml'
@@ -38,6 +42,12 @@ framework:
 twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
+    globals:
+        site_name: "%site_name%"
+        site_slogan: "%site_slogan%"
+        site_prefix: "%site_prefix%"
+        lang: "%locale%"
+        body_classes: ""
 
 # Doctrine Configuration
 doctrine:
